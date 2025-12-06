@@ -4,334 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --text-primary: #2c3e50;
-            --text-secondary: #7f8c8d;
-            --accent: #3498db;
-            --accent-hover: #2980b9;
-            --border: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #1a1a2e;
-            --bg-secondary: #16213e;
-            --text-primary: #eee;
-            --text-secondary: #bbb;
-            --accent: #0f3460;
-            --accent-hover: #e94560;
-            --border: #2a2a3e;
-            --shadow: rgba(0, 0, 0, 0.3);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            transition: background 0.3s ease;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: var(--bg-secondary);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px var(--shadow);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .theme-toggle {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background: var(--accent-hover);
-        }
-
-        .hero {
-            padding: 60px 0 40px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .blog-controls {
-            padding: 40px 0 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            max-width: 400px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid var(--border);
-            border-radius: 25px;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .category-filter {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .category-btn {
-            padding: 10px 20px;
-            border: 2px solid var(--border);
-            border-radius: 20px;
-            background: transparent;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .category-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .category-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            padding: 40px 0;
-        }
-
-        .blog-card {
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--shadow);
-        }
-
-        .blog-header {
-            height: 180px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-            position: relative;
-        }
-
-        .blog-category {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .blog-content {
-            padding: 25px;
-        }
-
-        .blog-title {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .blog-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .blog-summary {
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .blog-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            background: var(--accent);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-
-        .read-more {
-            display: inline-block;
-            color: var(--accent);
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .read-more:hover {
-            color: var(--accent-hover);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 60px 0;
-        }
-
-        .spinner {
-            border: 4px solid var(--border);
-            border-top: 4px solid var(--accent);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
-        footer {
-            background: var(--bg-secondary);
-            padding: 30px 0;
-            text-align: center;
-            color: var(--text-secondary);
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .blog-controls {
-                flex-direction: column;
-            }
-
-            .search-box {
-                max-width: 100%;
-            }
-        }
-    </style>
+    
+    <!-- CSS Dosyaları -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/blog.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <nav class="container">
             <a href="index.html" class="logo">Portföy</a>
@@ -345,6 +24,7 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Blog Yazıları</h1>
@@ -352,17 +32,21 @@
         </div>
     </section>
 
+    <!-- Main Content -->
     <div class="container">
+        <!-- Arama ve Filtre -->
         <div class="blog-controls">
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="🔍 Blog ara..." onkeyup="searchBlogs()">
             </div>
         </div>
 
+        <!-- Kategori Filtreleri -->
         <div class="category-filter" id="categoryFilter">
             <button class="category-btn active" onclick="filterByCategory('all')">Tümü</button>
         </div>
 
+        <!-- Blog Listesi -->
         <div id="blogContainer">
             <div class="loading">
                 <div class="spinner"></div>
@@ -371,194 +55,15 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2024 Portfolio. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 
-    <script>
-        // API URL - Kendi Railway URL'inizi buraya yazın
-        const API_URL = 'https://portfolio-api-production-d4e9.up.railway.app';
-
-        let allBlogs = [];
-        let filteredBlogs = [];
-        let currentCategory = 'all';
-
-        // Tema toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Sayfa yüklendiğinde
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            loadBlogs();
-            loadCategories();
-        });
-
-        // Blog yazılarını yükle
-        async function loadBlogs() {
-            try {
-                const response = await fetch(`${API_URL}/api/blogs`);
-                const result = await response.json();
-                
-                if (result.success) {
-                    allBlogs = result.data;
-                    filteredBlogs = allBlogs;
-                    displayBlogs(filteredBlogs);
-                } else {
-                    showError('Blog yazıları yüklenemedi');
-                }
-            } catch (error) {
-                showError('API bağlantısı başarısız: ' + error.message);
-            }
-        }
-
-        // Kategorileri yükle
-        async function loadCategories() {
-            try {
-                const response = await fetch(`${API_URL}/api/categories`);
-                const result = await response.json();
-                
-                if (result.success) {
-                    displayCategories(result.data);
-                }
-            } catch (error) {
-                console.error('Kategoriler yüklenemedi:', error);
-            }
-        }
-
-        // Kategorileri göster
-        function displayCategories(categories) {
-            const filterContainer = document.getElementById('categoryFilter');
-            
-            categories.forEach(category => {
-                const btn = document.createElement('button');
-                btn.className = 'category-btn';
-                btn.textContent = category;
-                btn.onclick = () => filterByCategory(category);
-                filterContainer.appendChild(btn);
-            });
-        }
-
-        // Kategoriye göre filtrele
-        async function filterByCategory(category) {
-            currentCategory = category;
-            
-            // Aktif butonu güncelle
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent === category || (category === 'all' && btn.textContent === 'Tümü')) {
-                    btn.classList.add('active');
-                }
-            });
-
-            if (category === 'all') {
-                filteredBlogs = allBlogs;
-            } else {
-                try {
-                    const response = await fetch(`${API_URL}/api/blogs/category/${category}`);
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        filteredBlogs = result.data;
-                    }
-                } catch (error) {
-                    showError('Filtreleme hatası: ' + error.message);
-                    return;
-                }
-            }
-            
-            displayBlogs(filteredBlogs);
-        }
-
-        // Arama fonksiyonu
-        async function searchBlogs() {
-            const query = document.getElementById('searchInput').value.trim();
-            
-            if (query === '') {
-                filterByCategory(currentCategory);
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/api/blogs/search?query=${encodeURIComponent(query)}`);
-                const result = await response.json();
-                
-                if (result.success) {
-                    filteredBlogs = result.data;
-                    displayBlogs(filteredBlogs);
-                }
-            } catch (error) {
-                showError('Arama hatası: ' + error.message);
-            }
-        }
-
-        // Blog yazılarını göster
-        function displayBlogs(blogs) {
-            const container = document.getElementById('blogContainer');
-            
-            if (blogs.length === 0) {
-                container.innerHTML = '<div class="no-results"><h3>Sonuç bulunamadı</h3><p>Farklı bir arama terimi veya kategori deneyin.</p></div>';
-                return;
-            }
-
-            container.innerHTML = '<div class="blog-grid"></div>';
-            const grid = container.querySelector('.blog-grid');
-
-            blogs.forEach(blog => {
-                const date = new Date(blog.publishedDate).toLocaleDateString('tr-TR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                const card = document.createElement('div');
-                card.className = 'blog-card';
-                card.onclick = () => window.location.href = `blog-detail.html?id=${blog.id}`;
-                
-                card.innerHTML = `
-                    <div class="blog-header">
-                        📝
-                        <div class="blog-category">${blog.category}</div>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">${blog.title}</h3>
-                        <div class="blog-meta">
-                            <span>👤 ${blog.author}</span>
-                            <span>📅 ${date}</span>
-                            <span>⏱️ ${blog.readTimeMinutes} dk</span>
-                        </div>
-                        <p class="blog-summary">${blog.summary}</p>
-                        <div class="blog-tags">
-                            ${blog.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
-                        <a href="blog-detail.html?id=${blog.id}" class="read-more">Devamını Oku →</a>
-                    </div>
-                `;
-                
-                grid.appendChild(card);
-            });
-        }
-
-        // Hata göster
-        function showError(message) {
-            const container = document.getElementById('blogContainer');
-            container.innerHTML = `
-                <div class="error">
-                    <h3>❌ Bir hata oluştu</h3>
-                    <p>${message}</p>
-                    <p style="margin-top: 10px;">Lütfen daha sonra tekrar deneyin.</p>
-                </div>
-            `;
-        }
-    </script>
+    <!-- JavaScript Dosyaları -->
+    <script src="js/theme.js"></script>
+    <script src="js/blog.js"></script>
 </body>
 </html>
